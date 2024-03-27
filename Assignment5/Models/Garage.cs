@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Assignment5.Models
 {
-    public class Garage<T> : IEnumerable<T> where T : Vehicle
+    public class Garage<T> : IEnumerable<T> where T : IVehicle
     {
         private T[] vehicles;
 
@@ -70,9 +70,9 @@ namespace Assignment5.Models
 
             for (int i = 0; i < vehicles.Length; i++)
             {
-                if (vehicles[i].RegistrationNumber.Equals(registrationNumber.Trim().ToUpper(), StringComparison.CurrentCultureIgnoreCase))
+                if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber.Trim().ToUpper(), StringComparison.CurrentCultureIgnoreCase))
                 {
-                    vehicles[i] = null!;
+                    vehicles[i] = default(T);
                     Size--;
                     return true;
                 }
@@ -81,14 +81,14 @@ namespace Assignment5.Models
             return false;
         }
 
-        public Vehicle? FindVehicleByReg(string registrationNumber)
+        public IVehicle? FindVehicleByReg(string registrationNumber)
         {
             if (Size == 0)
             {
                 return null;
             }
 
-            foreach (Vehicle vehicle in vehicles)
+            foreach (IVehicle vehicle in vehicles)
             {
                 if (vehicle != null)
                 {
@@ -126,9 +126,9 @@ namespace Assignment5.Models
             return vehicleTypeCount;
         }
 
-        public List<Vehicle> SearchVehiclesByCriteria(string? color = null, int? numberOfWheels = null, VehicleType? vehicleType = null)
+        public List<IVehicle> SearchVehiclesByCriteria(string? color = null, int? numberOfWheels = null, VehicleType? vehicleType = null)
         {
-            List<Vehicle> matchingVehicles = new List<Vehicle>();
+            List<IVehicle> matchingVehicles = new List<IVehicle>();
 
             foreach (var vehicle in vehicles)
             {

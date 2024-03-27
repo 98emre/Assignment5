@@ -16,7 +16,7 @@ namespace Assignment5.UI
     public class ConsoleUI : IUI
     {
 
-        private GarageHandler? garageHandler;
+        private IGarageHandler? garageHandler;
 
         public string InputRegNr { get; set; }
         public string InputColor { get; set; }
@@ -174,7 +174,7 @@ namespace Assignment5.UI
             Console.Write("\nSearch vehicle by registration number\nWrite registration number: ");
             string input = Console.ReadLine()!.Trim().ToUpper();
 
-            Vehicle? vehicle = garageHandler?.FindVehicleByReg(input);
+            IVehicle? vehicle = garageHandler?.FindVehicleByReg(input);
 
             Console.WriteLine(vehicle == null ? $"Vehicle with regitration number ({input}) does not exist" : $"{vehicle}");
         }
@@ -234,7 +234,7 @@ namespace Assignment5.UI
 
             } while (string.IsNullOrEmpty(InputColor));
 
-            List<Vehicle>? searchResult = garageHandler?.SearchVehiclesByCriteria(color: InputColor);
+            List<IVehicle>? searchResult = garageHandler?.SearchVehiclesByCriteria(color: InputColor);
             DisplaySearchResult(searchResult);
         }
 
@@ -250,13 +250,13 @@ namespace Assignment5.UI
 
             InputNrOfWheels = nrOfWheels;
 
-            List<Vehicle>? searchResult = garageHandler?.SearchVehiclesByCriteria(numberOfWheels: InputNrOfWheels);
+            List<IVehicle>? searchResult = garageHandler?.SearchVehiclesByCriteria(numberOfWheels: InputNrOfWheels);
             DisplaySearchResult(searchResult);
         }
 
         private void SearchByVehicleType()
         {
-            List<Vehicle>? searchResult = new List<Vehicle>();
+            List<IVehicle>? searchResult = new List<IVehicle>();
             bool running = true;
 
             while (running) 
@@ -307,7 +307,7 @@ namespace Assignment5.UI
             DisplaySearchResult(searchResult);
         }
         
-        private void DisplaySearchResult(List<Vehicle>? searchResult)
+        private void DisplaySearchResult(List<IVehicle>? searchResult)
         {
             if (searchResult != null && searchResult.Count != 0)
             {

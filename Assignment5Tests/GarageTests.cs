@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Assignment5.Enums;
 using Assignment5.Models;
 using Assignment5.Models.Vehicles;
+using Assignment5.Interfaces;
 
 namespace Assignment5.Tests
 {
@@ -14,12 +15,12 @@ namespace Assignment5.Tests
     public class GarageTests
     {
 
-        private Garage<Vehicle>? garage;
+        private Garage<IVehicle>? garage;
 
         [TestInitialize]
         public void Setup()
         {
-            garage = new Garage<Vehicle>(3);
+            garage = new Garage<IVehicle>(3);
         }
 
         [TestMethod()]

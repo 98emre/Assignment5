@@ -6,7 +6,7 @@ namespace Assignment5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To The System\n");
+            Console.WriteLine("\nWelcome To The Garage System");
             ConsoleUI uI = new ConsoleUI();
 
             uI.Start();
